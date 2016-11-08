@@ -21,8 +21,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-//android studio emulator was killed before it could launch. i usually use a different emulator, but its os is too old
-//did my best to move everything over.
+//android studio emulator was killed before it could launch. i usually use a different emulator, but it uses ap 19 for some reason
+//i still can't test anything, but this is what i've got
+
+//Right now, these graphs should just be displaying readings the database is getting in. As it is, you can't switch to looking
+//at averages, or looking at specific sensors, or anything like that. 
+//Didn't have time to create any dummy data yet. 
+//For now, the graph assumes that you've chosen to look at the ph graph
+//For now, the checkbox brings up the other graphs: soil moisture, temperature, and humidity
+//The button is supposed to let you pick a date and see the graph data for that date.
 
 public class MainActivity extends AppCompatActivity {
 
@@ -142,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //method that updates the series and graphs in realtime
+    //method that updates the series and graphs. this needs to be called in realtime separate from onCreate, so it is its own method
     public void addEntry() {
         phSeries.appendData((phgraph.getSeries()[lastX++]), true, phgraph.getSeries().length);
         humSeries.appendData((hmgraph.getSeries()[lastX++]), true, hmgraph.getSeries().length);
@@ -177,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //commented out - r.menu.menu and r.id.preferences are causing errors on my end, but I've left them unchanged
+//i have no idea why this happened    
  /*   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -208,16 +216,24 @@ public class MainActivity extends AppCompatActivity {
         //when clicked, the button will switch from the graph layout to the date slider layout
         public void onClick(View v) {
             setContentView(R.layout.selectdateandtime);
+            //instantiate the datepicker
             final DatePicker date = (DatePicker) findViewById(R.id.datePicker);
+            //updates the date
             date.updateDate(date.getYear(), date.getMonth(), date.getDayOfMonth());
+            //gets the date
             Date dt = new Date(date.getYear(), date.getMonth(), date.getDayOfMonth());
+            //formats the date
             SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+            //convert the date into a long
             long output = dt.getTime() / 1000L;
             String str = Long.toString(output);
             long timestamp = Long.parseLong(str) * 1000;
+            //new timestamp from the long made from the date
             Timestamp ts = new Timestamp(timestamp);
+            //query data from that date
             dq.setTo(ts);
             dq.setFrom(ts);
+            //back to the graph
             setContentView(R.layout.fragmenttab2);
         }
 

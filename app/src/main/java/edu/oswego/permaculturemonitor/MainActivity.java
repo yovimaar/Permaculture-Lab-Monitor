@@ -21,6 +21,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+//android studio emulator was killed before it could launch. i usually use a different emulator, but its os is too old
+//did my best to move everything over.
+
 public class MainActivity extends AppCompatActivity {
 
     //declaring series, lastX, and graph objects
@@ -139,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //method that updates the series and graphs in realtime
     public void addEntry() {
         phSeries.appendData((phgraph.getSeries()[lastX++]), true, phgraph.getSeries().length);
         humSeries.appendData((hmgraph.getSeries()[lastX++]), true, hmgraph.getSeries().length);

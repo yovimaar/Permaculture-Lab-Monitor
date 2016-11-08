@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="8bc45ce1f63d1a391fd38b32a201be5a42f9c95d">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.0.0_9146e2da4cb3df07fbc4018248cf82f8749b3d7d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.0_63e630c8be7e619a529cf5ccae0b0bcc25d1de28\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="ee5faf4dee5b6a4364bf51587871047dde7c703a">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.0_b8acf1bdf12006a59b75b000d1dd9534f02d410d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.0_4f3a8512f759b9845f0cd249f80aeb5a08b12507\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="f2e3b9bc1ec25f652e8007ce7774c991e38f6a00">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.0_686c834b661bc25ac16eeee6f13787fb9121584e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="07daa0b6e1d455c82a38422ffe287c18823d339a">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.0.0_e0ee6b86c28c06d2f12329d52aacdd0cf52db126\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.0.0_cbd2c118e04e2dd3a23f0171c776b872fe40e95b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.0.0_eafedcfbedd5c00449418fb46699221365d8c027\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="3b61a70884adaf0be3fc06c70c801e3e6df13133">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.0_20acbffcbddb9dd6f536a7cf7f959ab92454480b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.astuetz\pagerslidingtabstrip\1.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7912610ed96381c25c36d986eba422731b9641b6">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.astuetz-pagerslidingtabstrip-1.0.1_94d47121a0a8e25e5ff0deeec31b6afea1453fd0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.0.0_1c74a2f735cb5e0df9e5eb97b61dee2116621de9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5554344d2d282647e1666b8355aa7723230e6721">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_cd377d6d4759a369cb804c635574a5ddd2ffab79\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.0\support-annotations-25.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="a22d2cc94da87b254451fa8ed28afc30b4653773">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.0.0_565ff23d3a2521ae1b99b2be6fdbd75bc21e0e97\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="4ccbcda5c72027c7f7c14be9ff8640d9cb0d8da0">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.0.0_633afbafa0eb9a91c86950f77b4bd0c36a40811a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="cdb0308627c06ace1b29f19148d3e2c353fad153">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_0de636b4aaba753f674eab1ed0f01b8e24d1b4b2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="75b1f366ff0bbc78f8b1f7cf0dc82e7c53afef6a">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.0.0_655495eac15f35e8ee5ae10e6aa78eab237d3f14\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="26674000177e45447a0326a6ad84612761199a13">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.0.0_ece8725d2680ebca194f926816fc61e4a7dbe731\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ioniz\GITREPO\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d29714cc76b38157e3cbd034c66e1ec808eb4c19">
+        <dex dex="C:\Users\ioniz\GITREPO\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.0.0_d766bfb1f11f96a53fe1617a3fc11635f98d7cea\classes.dex" />
+    </item>
+
+</items>

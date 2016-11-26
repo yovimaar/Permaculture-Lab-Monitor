@@ -9,19 +9,25 @@
               android:orientation="vertical"
     tools:context="edu.oswego.permaculturemonitor.MainActivity">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:background="@color/colorPrimary"
         android:minHeight="70dp"
-
         >
+
         <TextView
+            android:id="@+id/header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lab Monitor"
-            android:textSize="20sp"
+            android:fontFamily="sans-serif-condensed"
+            android:layout_marginEnd="80dp"
+            android:textSize="26sp"
             android:textColor="@color/textColor"
             />
 
@@ -29,29 +35,18 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:contentDescription="Lab logo"
+            android:layout_marginStart="60dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/logo"
             />
 
     </android.support.v7.widget.Toolbar>
+    </RelativeLayout>
 
 
-        <com.astuetz.PagerSlidingTabStrip
-            android:id="@+id/tabs"
-            app:pstsShouldExpand="true"
-            app:pstsTextAllCaps="true"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:textColor="@color/textColor"
-            android:background="@color/tabsColor"
 
-            />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            />
 
 </LinearLayout>

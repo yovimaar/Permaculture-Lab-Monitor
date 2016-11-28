@@ -28,6 +28,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.0'
     testCompile 'junit:junit:4.12'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    compile 'com.android.support:design:22.2.0'
 
 
 

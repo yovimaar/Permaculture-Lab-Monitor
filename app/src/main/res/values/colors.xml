@@ -3,6 +3,5 @@
     <color name="colorPrimary">#498957</color>
     <color name="colorPrimaryDark"> #3e744a</color>
     <color name="colorAccent">#ffcc00</color>
-    <color name="tabsColor"> #50955f</color>
     <color name="textColor">#fff</color>
 </resources>

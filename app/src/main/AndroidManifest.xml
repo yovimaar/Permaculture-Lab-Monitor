@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label=""
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -15,6 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TempActivity" android:label="Temperature Monitor" />
+        <activity android:name=".SoilActivity" />
+        <activity android:name=".PhActivity" />
+        <activity android:name=".HumidityActivity" />
+        <activity android:name=".AboutActivity" />
+
     </application>
 
 </manifest>

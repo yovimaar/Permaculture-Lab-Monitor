@@ -72,12 +72,13 @@
                     android:layout_marginBottom="7dp"/>
 
                 <TextView
+                    android:id="@+id/tempTextViewVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.0"
                     android:textSize="15sp"
                     android:layout_toRightOf="@id/tempTextView"
-                    android:layout_marginLeft="125dp"
+                    android:layout_marginLeft="110dp"
                     />
 
                 <Button
@@ -128,12 +129,13 @@
                     android:layout_marginBottom="7dp"/>
 
                 <TextView
+                    android:id="@+id/moistTextViewVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.0"
                     android:textSize="15sp"
                     android:layout_toRightOf="@id/moistTextView"
-                    android:layout_marginStart="170dp"
+                    android:layout_marginStart="150dp"
                     />
 
                 <Button
@@ -184,12 +186,13 @@
                     android:layout_marginBottom="7dp"/>
 
                 <TextView
+                    android:id="@+id/humTextViewVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.0"
                     android:textSize="15sp"
                     android:layout_toRightOf="@id/humTextView"
-                    android:layout_marginLeft="170dp"
+                    android:layout_marginLeft="155dp"
                     />
 
                 <Button
@@ -240,12 +243,13 @@
                     android:layout_marginBottom="7dp"/>
 
                 <TextView
+                    android:id="@+id/pHTextViewVal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0.0"
                     android:textSize="15sp"
                     android:layout_toRightOf="@id/pHTextView"
-                    android:layout_marginLeft="240dp"
+                    android:layout_marginLeft="225dp"
                     />
 
                 <Button

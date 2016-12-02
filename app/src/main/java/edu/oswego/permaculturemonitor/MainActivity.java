@@ -2,20 +2,47 @@ package edu.oswego.permaculturemonitor;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
+    private String ConnURL = "jdbc:mysql://pi.cs.oswego.edu:3306/pll";
+    private String ur = "pllReader";
+    private String pass = "readStuff";
+    private Connection con;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //////CONNECTION TO DB///////////////////////////////////////////////////////////////////////////
+        DataQuery dq;
+        ReadingsAnalizer ra = new ReadingsAnalizer();
+        ArrayList<Reading> readings;
+
+        //connect to the Database
+        con = connect();
+        if(con != null){
+            Connector.getInstance().setConnection(con);
+            dq = new DataQuery();
+            //exeTest(con);
+        } else {dq = new DataQuery();}
+
+        /////////////////////////////////////////////////////////////////////////////////
+
 
         // action bar toolbar
         Toolbar actionBarToolBar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -126,6 +153,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /////////////////////////////////////////////////////////////////////////////////////
+        //Update the Text view of the "buttons"
+        ArrayList<Reading> phVals, tempVals, humidVals, moistVals;
+        TextView ph = (TextView) findViewById(R.id.pHTextViewVal);
+        TextView temperature = (TextView) findViewById(R.id.tempTextViewVal);
+        TextView soil = (TextView) findViewById(R.id.moistTextViewVal);
+        TextView humidity = (TextView) findViewById(R.id.humTextViewVal);
+        phVals = dq.getLatestPHs();
+        tempVals = dq.getLatestTemps();
+        humidVals = dq.getLatestHumids();
+        moistVals = dq.getLatestMoists();
+
+        ra.setList(phVals);
+        ph.setText("" + ra.getAverage());
+
+        ra.setList(tempVals);
+        temperature.setText("" + ra.getAverage());
+
+        ra.setList(moistVals);
+        soil.setText("" + ra.getAverage());
+
+        ra.setList(humidVals);
+        humidity.setText("" + ra.getAverage());
+        ////////////////////////////////////////////////////////////////////////////////////
+
     }
 
 
@@ -147,4 +199,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    /////ESTAbLISH A CONNECTION//////////////////////////////////////////////////////////////////////
+    public Connection connect() {
+        try {
+            StrictMode.ThreadPolicy policy = new
+                    StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(ConnURL, ur, pass);
+            Log.v("Connection", "Connection success");
+            return  connection;
+
+        } catch (Exception e) {
+            Log.v("Connection", "Connection FAILED");
+            e.printStackTrace();
+            return null;
+        }
+    }
+    //////////////////////////////////////////////////////////////////////////
 }

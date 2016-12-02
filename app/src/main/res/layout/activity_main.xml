@@ -37,98 +37,242 @@
                 android:src="@mipmap/logo" />
 
 
-
         </android.support.v7.widget.Toolbar>
 
 
     </RelativeLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/border"
+        android:orientation="vertical">
 
-        <Button
-
-            android:id="@+id/temperature"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#C3F9CC"
-            android:layout_weight="1"
-            android:text="Temperature"
-            android:textColor="#000"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:padding="6dp">
 
-        <Button
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp">
 
-            android:id="@+id/humidity"
+                <TextView
+                    android:id="@+id/tempTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Temperature"
+                    android:textAppearance="@color/colorPrimary"
+                    android:textSize="26sp"
+                    android:layout_marginBottom="7dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0"
+                    android:textSize="15sp"
+                    android:layout_toRightOf="@id/tempTextView"
+                    android:layout_marginLeft="125dp"
+                    />
+
+                <Button
+                    android:id="@+id/tempMapButton"
+                    android:layout_below="@id/tempTextView"
+                    android:layout_width="145dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/buttonshape"
+                    android:shadowColor="#A8A8A8"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp"
+                    android:text="Map" />
+
+
+                <Button
+                    android:id="@+id/tempGraphButton"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/buttonshape"
+                    android:shadowColor="#A8A8A8"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:layout_below="@+id/tempTextView"
+                    android:layout_toRightOf="@id/tempMapButton"
+                    android:layout_marginLeft="10dp"
+                    android:text="Graph" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#97E6A4"
-            android:layout_weight="1"
-            android:text="Humidity"
-            android:textColor="#000"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:padding="6dp">
 
-    </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        >
+                <TextView
+                    android:id="@+id/moistTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Moisture"
+                    android:textAppearance="@color/colorPrimary"
+                    android:textSize="26sp"
+                    android:layout_marginBottom="7dp"/>
 
-        <Button
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0"
+                    android:textSize="15sp"
+                    android:layout_toRightOf="@id/moistTextView"
+                    android:layout_marginStart="170dp"
+                    />
 
-            android:id="@+id/ph"
+                <Button
+                    android:id="@+id/moistMapButton"
+                    android:layout_below="@id/moistTextView"
+                    android:layout_width="145dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/buttonshape"
+                    android:shadowColor="#A8A8A8"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp"
+                    android:text="Map" />
+
+
+                <Button
+                    android:id="@+id/moistGraphButton"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/buttonshape"
+                    android:shadowColor="#A8A8A8"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:layout_below="@+id/moistTextView"
+                    android:layout_toRightOf="@id/moistMapButton"
+                    android:layout_marginLeft="10dp"
+                    android:text="Graph" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#6EAF79"
-            android:text="pH"
-            android:textColor="#000"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:padding="6dp">
 
-        <Button
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp">
 
-            android:id="@+id/soil"
+                <TextView
+                    android:id="@+id/humTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Humidity"
+                    android:textAppearance="@color/colorPrimary"
+                    android:textSize="26sp"
+                    android:layout_marginBottom="7dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0"
+                    android:textSize="15sp"
+                    android:layout_toRightOf="@id/humTextView"
+                    android:layout_marginLeft="170dp"
+                    />
+
+                <Button
+                    android:id="@+id/humMapButton"
+                    android:layout_below="@id/humTextView"
+                    android:layout_width="145dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/buttonshape"
+                    android:shadowColor="#A8A8A8"
+                    android:textColor="@android:color/white"
+                    android:textSize="16dp"
+                    android:text="Map" />
+
+
+                <Button
+                    android:id="@+id/humGraphButton"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/buttonshape"
+                    android:shadowColor="#A8A8A8"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:layout_below="@+id/humTextView"
+                    android:layout_toRightOf="@id/humMapButton"
+                    android:layout_marginLeft="10dp"
+                    android:text="Graph" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#9FCEA7"
-            android:text="Soil"
-            android:textColor="#000"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:padding="6dp">
 
-    </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        >
+                <TextView
+                    android:id="@+id/pHTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="pH"
+                    android:textAppearance="@color/colorPrimary"
+                    android:textSize="26sp"
+                    android:layout_marginBottom="7dp"/>
 
-        <Button
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0"
+                    android:textSize="15sp"
+                    android:layout_toRightOf="@id/pHTextView"
+                    android:layout_marginLeft="240dp"
+                    />
 
-            android:id="@+id/contact"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#719476"
-            android:onClick="contactUs"
-            android:text="Contact Us"
-            android:textColor="#000"/>
+                <Button
+                    android:id="@+id/pHMapButton"
+                    android:layout_below="@id/pHTextView"
+                    android:layout_width="145dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/buttonshape"
+                    android:shadowColor="#A8A8A8"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:text="Map" />
 
-        <Button
 
-            android:id="@+id/about"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#5FC470"
-            android:text="About Us"
-            android:textColor="#000"/>
-
+                <Button
+                    android:id="@+id/phGraphButton"
+                    android:layout_width="145dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/buttonshape"
+                    android:shadowColor="#A8A8A8"
+                    android:textColor="@android:color/white"
+                    android:textSize="14dp"
+                    android:layout_below="@+id/pHTextView"
+                    android:layout_toRightOf="@id/pHMapButton"
+                    android:layout_marginLeft="10dp"
+                    android:text="Graph" />
+            </RelativeLayout>
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

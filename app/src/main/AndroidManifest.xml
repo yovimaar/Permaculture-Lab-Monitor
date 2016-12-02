@@ -15,13 +15,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TempActivity" />
-        <activity android:name=".SoilActivity" />
-        <activity android:name=".PhActivity" />
-        <activity android:name=".HumidityActivity" />
-        <activity android:name=".AboutActivity" />
         <activity android:name=".MyPreferencesActivity"/>
+        <activity android:name=".MapsActivity"/>
+        <activity android:name=".TempGraphActivity"/>
+        <activity android:name=".TempMapActivity"/>
+        <activity android:name=".HumGraphActivity"/>
+        <activity android:name=".HumMapActivity"/>
+        <activity android:name=".MoistMapActivity"/>
+        <activity android:name=".MoistGraphActivity"/>
+        <activity android:name=".PhGraphActivity"/>
+        <activity android:name=".PhMapActivity"/>
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCBMM-ncdjQ2ooj_eJN0c2rbJMv2r9TWnI"/>
     </application>
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+
+
+
 
 </manifest>

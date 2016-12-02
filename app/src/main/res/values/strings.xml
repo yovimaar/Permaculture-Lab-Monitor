@@ -1,7 +1,4 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
 <string name="app_name">PermacultureMonitor</string>
-
-    <string name="order_summary_email_subject">Hello!<xliff:g id="" example="">%s</xliff:g></string>
-
 </resources>

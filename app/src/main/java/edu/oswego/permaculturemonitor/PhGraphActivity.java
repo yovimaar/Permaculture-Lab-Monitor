@@ -248,9 +248,11 @@ public class PhGraphActivity  extends AppCompatActivity {
                 }
             } else {
                 d = "NULL READINGS";
+                Toast.makeText(getApplicationContext(), "NULL READINGS", Toast.LENGTH_SHORT).show();
             }
         } else {
             d = "NULL CONNECTION";
+            Toast.makeText(getApplicationContext(), "NULL CONNECTION", Toast.LENGTH_SHORT).show();
         }
         diag.setText(d);
     }

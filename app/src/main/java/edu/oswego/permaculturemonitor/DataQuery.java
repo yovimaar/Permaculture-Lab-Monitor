@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.heatmaps.WeightedLatLng;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -15,6 +18,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.sql.ResultSetMetaData;
 
+
+import com.google.maps.android.heatmaps.WeightedLatLng;
+import java.util.List;
 
 /**
  * Created by chrisrk192 on 11/1/2016.
@@ -943,6 +949,126 @@ public class DataQuery {
             return null;
         }
         return vals;
+    }
+
+    public List<WeightedLatLng> getWeightedFromZone(int zoneID){
+        ArrayList<WeightedLatLng> list = new ArrayList<WeightedLatLng>();
+        //get the data
+        /////////////////////////////////////////////////////////////////
+        ArrayList<Reading> vals = new ArrayList<>();
+        //returns zoneID sensorID loc value
+        String query = "select zone.id,sensor.id, X(loc),Y(loc),reading.value, " +
+                "reading.ts from zone,sensor,reading where " +
+                "zone.id = '" + zoneID  +"' and ST_CONTAINS(zone.perimeter,sensor.loc) " +
+                "and sensor.id = reading.sensorId";
+        ResultSet rs;
+        ResultSetMetaData metadata;
+        //Query
+        try{
+            if(con == null){
+                //Error connecting to DataBase
+                Log.e("connection","Couldnt connect to to database!?!");
+            } else {
+                //just a test query
+                Statement stmt = con.createStatement();
+                rs = stmt.executeQuery(query);
+                if (rs.next()){
+                    Log.i("connection","it worked!");
+                    metadata = rs.getMetaData();
+                    while (rs.next()) {
+                        Reading read = new Reading();
+                        Log.v("Reading", ""
+                                + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
+                                + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(4)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getFloat(5)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getTimestamp(6)+ "\n"
+                        );
+                        //no need for zoneID
+                        read.setSensorID(rs.getInt(2));
+                        read.setX(rs.getFloat(3));
+                        read.setY(rs.getFloat(4));
+                        read.setValue(rs.getFloat(5));
+                        read.setTs(rs.getTimestamp(6));
+                        vals.add(read);
+                    }
+                }
+            }
+        }catch (Exception ex){
+            Log.e("Exceptions","");
+            ex.printStackTrace();
+            return null;
+        }
+        ///////////////////////////////////////////////////////////////////
+        //parse it
+        for (int i = 0; i < vals.size(); i++) {
+            double val = (double) vals.get(i).getValue();
+            double lat = (double)vals.get(i).getY();
+            double lng = (double)vals.get(i).getX();
+
+            list.add(new WeightedLatLng(new LatLng(lat,lng),val));
+        }
+        return list;
+    }
+
+    public List<LatLng> getLatLngFromZone(int zoneID){
+        ArrayList<LatLng> list = new ArrayList<LatLng>();
+        //get the data
+        /////////////////////////////////////////////////////////////////
+        ArrayList<Reading> vals = new ArrayList<>();
+        //returns zoneID sensorID loc value
+        String query = "select zone.id,sensor.id, X(loc),Y(loc),reading.value, " +
+                "reading.ts from zone,sensor,reading where " +
+                "zone.id = '" + zoneID  +"' and ST_CONTAINS(zone.perimeter,sensor.loc) " +
+                "and sensor.id = reading.sensorId";
+        ResultSet rs;
+        ResultSetMetaData metadata;
+        //Query
+        try{
+            if(con == null){
+                //Error connecting to DataBase
+                Log.e("connection","Couldnt connect to to database!?!");
+            } else {
+                //just a test query
+                Statement stmt = con.createStatement();
+                rs = stmt.executeQuery(query);
+                if (rs.next()){
+                    Log.i("connection","it worked!");
+                    metadata = rs.getMetaData();
+                    while (rs.next()) {
+                        Reading read = new Reading();
+                        Log.v("Reading", ""
+                                + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
+                                + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(4)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getFloat(5)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getTimestamp(6)+ "\n"
+                        );
+                        //no need for zoneID
+                        read.setSensorID(rs.getInt(2));
+                        read.setX(rs.getFloat(3));
+                        read.setY(rs.getFloat(4));
+                        read.setValue(rs.getFloat(5));
+                        read.setTs(rs.getTimestamp(6));
+                        vals.add(read);
+                    }
+                }
+            }
+        }catch (Exception ex){
+            Log.e("Exceptions","");
+            ex.printStackTrace();
+            return null;
+        }
+        ///////////////////////////////////////////////////////////////////
+        //parse it
+        for (int i = 0; i < vals.size(); i++) {
+            double lat = (double)vals.get(i).getY();
+            double lng = (double)vals.get(i).getX();
+            list.add(new LatLng(lat,lng));
+        }
+        return list;
     }
 
     public ArrayList<Reading> getRange(Timestamp from, Timestamp to, int typeID){

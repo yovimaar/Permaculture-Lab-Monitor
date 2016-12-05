@@ -33,6 +33,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile files {'libs/mysql-connector-java-5.1.40-bin.jar'}
+    compile 'com.jjoe64:graphview:4.2.1'
     compile 'com.android.support:appcompat-v7:25.0.0'
     testCompile 'junit:junit:4.12'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'

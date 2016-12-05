@@ -20,8 +20,16 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
 import java.util.Calendar;
+import java.util.Date;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
 /**
  * Created by Vi on 12/1/16.
  */
@@ -47,6 +55,16 @@ public class MoistGraphActivity extends AppCompatActivity {
     private Timestamp fromTS2 = Timestamp.valueOf("2016-10-10 00:00:00");
     private Timestamp toTS2 = Timestamp.valueOf("2016-12-10 00:00:00");
     ///////END DATE PICKER STUFF////////////////////////////////////////////////////////////////////////////////////////
+
+    LineGraphSeries<DataPoint> moistseries1,moistseries2;
+    DataPoint[] dataPoints1,dataPoints2;
+    private Graph moistgraph;
+    private int lastX = 0;
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +100,61 @@ public class MoistGraphActivity extends AppCompatActivity {
         ///////END DATE PICKER STUFF////////////////////////////////////////////////////////////////////////////////////////
 
 
+ //////////GRAPH VIEW STUFF//////////////////////////////////////////////////////////////////////////////////////////
+        DataQuery dq = new DataQuery();
+        //create reading
+        Reading read = new Reading();
+        //create readingsanalizers: one for each type of reading
+
+        GraphView moistGraph = (GraphView) findViewById(R.id.graph);
+        moistseries1 = new LineGraphSeries<>();
+        moistGraph.getGridLabelRenderer().setVerticalAxisTitle("Value");
+        moistGraph.getGridLabelRenderer().setHorizontalAxisTitle("Date");
+        moistGraph.getViewport().setScrollable(true);
+        moistGraph.getViewport().setScalableY(true);
+
+        moistGraph.addSeries(moistseries1);
+
+/////////END GRAPH VIEW STUFF///////////////////////////////////////////////////////////////////////////////////////
     }
+/////////GRAPH STUFF//////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void addEntry() {
+        //UNUSED
+        moistseries1.appendData((moistgraph.getSeries()[lastX++]), true, moistgraph.getSeries().length);
+    }
+    public void onResume() {
+        //UNUSED
+        //simulate real time with thread that appends data to the graph
+        final DataQuery dq = new DataQuery();
+        super.onResume();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                for (int i = 0; i < dq.getLatestMoists().size(); i++) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            addEntry();
+                        }
+                    });
+                    //sleep to slow down the add of entries
+                    try {
+                        Thread.sleep(600);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+/////////END GRAPH STUFF//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
     ///////Datepicker stuff/////////////////////////////////////////////////////////////////////////////////////
 
@@ -227,6 +299,26 @@ public class MoistGraphActivity extends AppCompatActivity {
                             Log.e("DatePicker","Bad flag");
                             break;
                     }
+                    dataPoints1 = updateDataSet1();//set 1
+                    dataPoints2 = updateDataSet2();
+
+////////////////////////////////////////////
+                    //moistgraph = new Graph(0, 100,0, 40, 10, 10, moistra.getList());
+                    GraphView moistGraph = (GraphView) findViewById(R.id.graph);
+                    //phSeries = new LineGraphSeries<>(hmgraph.getSeries());
+                    moistseries1 = new LineGraphSeries<>(dataPoints1);
+                    moistseries2 = new LineGraphSeries<>(dataPoints2);
+                    //humGraph.addSeries(phSeries);
+                    moistGraph.removeAllSeries();
+                    moistGraph.addSeries(moistseries1);
+                    moistGraph.addSeries(moistseries2);
+
+                    moistGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext()));
+                    moistGraph.getGridLabelRenderer().setNumHorizontalLabels(3);
+                    moistGraph.getGridLabelRenderer().setNumVerticalLabels(5);
+                    moistGraph.getGridLabelRenderer().setHumanRounding(false);
+// //////////////////////////////////////////
+
 
                 }
             };
@@ -253,47 +345,67 @@ public class MoistGraphActivity extends AppCompatActivity {
                             "ReadingID :" + readings.get(i).getReadingID() + "\n";
                 }
 
-            } else {d = "NULL READINGS";}
-        } else{d = "NULL CONNECTION";}
+            } else {
+                d = "NULL READINGS";
+                Toast.makeText(getApplicationContext(), "NULL READINGS", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            d = "NULL CONNECTION";
+            Toast.makeText(getApplicationContext(), "NULL CONNECTION", Toast.LENGTH_SHORT).show();
+        }
         diag.setText(d);
     }
 
-    public void updateDataSets(){
+    public DataPoint[] updateDataSet1(){
         con = Connector.getInstance().getConnection();
-
-
         if(con != null) {
             DataQuery dq = new DataQuery();
             ReadingsAnalizer ra = new ReadingsAnalizer();
-            ArrayList<Reading> readings,history;
-
+            ArrayList<Reading> readings;
 
             Log.v("Connection", "Not Null");
             readings = dq.getLatestMoists(fromTS, toTS);// Set1 buttons
-            history = dq.getLatestMoists(fromTS2,toTS2);// Set2 buttons
             Log.v("DATA SETS!!!!!!!!!", "FROM : " + fromTS.toString() + "\n" + "     TO: " + toTS.toString());
             Log.v("DATA SETS!!!!!!!!!", "FROM : " + fromTS2.toString() + "\n" + "     TO: " + toTS2.toString());
             if (readings != null) {
                 //UPDATE LISTS, OR PARSE READINGS TO GRAPHABLE FORMAT
+                DataPoint[] values = new DataPoint[readings.size()];
                 for (int i = 0; i < readings.size(); i++) {
-                    //TO DO
-
-
-
+                    Date x = readings.get(i).getTSasDate(); //PROBLEM HERE BECAUSE IT RETURNS AS A DOUBLE
+                    double y = (double) readings.get(i).getValue();
+                    DataPoint v = new DataPoint(x, y);
+                    values[i] = v;
                 }
-            }
+                return values;
+            } else {return null;}
+        }else {return null;}
+    }
+    public DataPoint[] updateDataSet2(){
+        con = Connector.getInstance().getConnection();
+        if(con != null) {
+            DataQuery dq = new DataQuery();
+            ReadingsAnalizer ra = new ReadingsAnalizer();
+            ArrayList<Reading> history;
+
+
+            Log.v("Connection", "Not Null");
+            history = dq.getLatestMoists(fromTS2,toTS2);// Set2 buttons
+            Log.v("DATA SETS!!!!!!!!!", "FROM : " + fromTS.toString() + "\n" + "     TO: " + toTS.toString());
+            Log.v("DATA SETS!!!!!!!!!", "FROM : " + fromTS2.toString() + "\n" + "     TO: " + toTS2.toString());
             if (history != null) {
                 //UPDATE LISTS, OR PARSE READINGS TO GRAPHABLE FORMAT
+                DataPoint[] values = new DataPoint[history.size()];
                 for (int i = 0; i < history.size(); i++) {
-                    //TO DO
-
-
-
+                    double x = (double) history.get(i).getTs().getTime(); //PROBLEM HERE BECAUSE IT RETURNS AS A DOUBLE
+                    double y = (double) history.get(i).getValue();
+                    DataPoint v = new DataPoint(x, y);
+                    values[i] = v;
                 }
-            }
-        }
-
+                return values;
+            } else {return null;}
+        }else {return null;}
     }
+
     //////////END DATEPICKER STUFF/////////////////////////////////////////////////////////////////////////////////
 
 }

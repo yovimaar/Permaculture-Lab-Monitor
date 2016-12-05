@@ -78,7 +78,7 @@
                     android:text="0.0"
                     android:textSize="15sp"
                     android:layout_toRightOf="@id/tempTextView"
-                    android:layout_marginLeft="110dp"
+                    android:layout_marginLeft="125dp"
                     />
 
                 <Button
@@ -135,7 +135,7 @@
                     android:text="0.0"
                     android:textSize="15sp"
                     android:layout_toRightOf="@id/moistTextView"
-                    android:layout_marginStart="150dp"
+                    android:layout_marginStart="170dp"
                     />
 
                 <Button
@@ -192,7 +192,7 @@
                     android:text="0.0"
                     android:textSize="15sp"
                     android:layout_toRightOf="@id/humTextView"
-                    android:layout_marginLeft="155dp"
+                    android:layout_marginLeft="170dp"
                     />
 
                 <Button
@@ -249,7 +249,7 @@
                     android:text="0.0"
                     android:textSize="15sp"
                     android:layout_toRightOf="@id/pHTextView"
-                    android:layout_marginLeft="225dp"
+                    android:layout_marginLeft="240dp"
                     />
 
                 <Button

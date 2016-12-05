@@ -81,9 +81,7 @@ public class TempGraphActivity  extends AppCompatActivity {
     @SuppressWarnings("deprecation")
     public void setFrom(View view) {
         showDialog(FROM_DIALOG);
-        Toast.makeText(getApplicationContext(), "from",
-                Toast.LENGTH_SHORT)
-                .show();
+        Toast.makeText(getApplicationContext(), "from", Toast.LENGTH_SHORT).show();
     }
 
     @SuppressWarnings("deprecation")
@@ -160,6 +158,8 @@ public class TempGraphActivity  extends AppCompatActivity {
                             else
                                 fromTS = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
                             Log.v("DatePicker from", fromTS.toString());
+                            Toast.makeText(getApplicationContext(), "Date Set: "
+                                    + fromTS.toString(), Toast.LENGTH_SHORT).show();
                             testTime();//just a test, not needed
                             break;
                         case 2://to
@@ -176,6 +176,8 @@ public class TempGraphActivity  extends AppCompatActivity {
                             else
                                 toTS = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
                             Log.v("DatePicker to", toTS.toString());
+                            Toast.makeText(getApplicationContext(), "Date Set: "
+                                    + toTS.toString(), Toast.LENGTH_SHORT).show();
                             testTime();//just a test, not needed
                             break;
 
@@ -195,6 +197,8 @@ public class TempGraphActivity  extends AppCompatActivity {
                             else
                                 fromTS2 = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
                             Log.v("DatePicker from", fromTS2.toString());
+                            Toast.makeText(getApplicationContext(), "Date Set: "
+                                    + fromTS.toString(), Toast.LENGTH_SHORT).show();
                             testTime();//just a test, not needed
                             break;
                         case 4://to
@@ -211,12 +215,15 @@ public class TempGraphActivity  extends AppCompatActivity {
                             else
                                 toTS2 = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
                             Log.v("DatePicker to", toTS2.toString());
+                            Toast.makeText(getApplicationContext(), "Date Set: "
+                                    + toTS.toString(), Toast.LENGTH_SHORT).show();
                             testTime();//just a test, not needed
                             break;
 
 
                         default:
                             Log.e("DatePicker", "Bad flag");
+                            Toast.makeText(getApplicationContext(), "Bad Date Flag", Toast.LENGTH_SHORT).show();
                             break;
                     }
 
@@ -247,9 +254,11 @@ public class TempGraphActivity  extends AppCompatActivity {
 
             } else {
                 d = "NULL READINGS";
+                Toast.makeText(getApplicationContext(), "NULL READINGS", Toast.LENGTH_SHORT).show();
             }
         } else {
             d = "NULL CONNECTION";
+            Toast.makeText(getApplicationContext(), "NULL CONNECTION", Toast.LENGTH_SHORT).show();
         }
         diag.setText(d);
     }

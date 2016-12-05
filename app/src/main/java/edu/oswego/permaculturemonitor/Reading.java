@@ -2,7 +2,9 @@ package edu.oswego.permaculturemonitor;
 
 import android.graphics.Point;
 import android.os.StrictMode;
+import android.util.Log;
 
+import java.util.Date;
 import java.sql.Timestamp;
 import java.sql.Blob;
 
@@ -108,5 +110,36 @@ public class Reading {
         cloned.setY(y);
 
         return cloned;
+    }
+
+
+    public int getTSasInt(){
+        int date = 0;
+        if(ts != null){
+            String timeString = ts.toString();
+            int year,month,day;
+            year = (timeString.charAt(0) - '0')* 1000;
+            year += (timeString.charAt(1) - '0')* 100;
+            year += (timeString.charAt(2) - '0')* 10;
+            year += (timeString.charAt(3) - '0');
+            Log.v("Date to Int", "Year : "+ year);
+            month = (timeString.charAt(5) - '0') * 10;
+            month += (timeString.charAt(6) - '0');
+            Log.v("Date to Int", "Month : "+ month);
+            day =  (timeString.charAt(8) - '0') *10;
+            day +=  (timeString.charAt(9) - '0');
+            Log.v("Date to Int", "Day : "+ day);
+
+            date = (year * 10000) +(month * 100) + day;
+            Log.v("Date to Int","Date: " + date);
+            return date;
+        } else {return date;}
+    }
+
+    public Date getTSasDate(){
+        if (ts != null){
+            Date d = new Date(ts.getTime());
+            return d;
+        }else return null;
     }
 }

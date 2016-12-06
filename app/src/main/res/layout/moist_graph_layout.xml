@@ -3,44 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:text="Set1:INIT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/fromBottonM"
-            android:onClick="setFrom"
-            android:datePickerMode="spinner" />
-
-        <Button
-            android:text="Set1:FIN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/toButtonM"
-            android:onClick="setTo"
-            android:datePickerMode="spinner" />
-
-        <Button
-            android:text="Set2:INIT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/fromBotton2M"
-            android:onClick="setFrom2"
-            android:datePickerMode="spinner" />
-
-        <Button
-            android:text="Set2:FIN"
-            android:layout_width="86dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/toButton2M"
-            android:onClick="setTo2"
-            android:datePickerMode="spinner" />
-    </LinearLayout>
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -51,12 +13,49 @@
             android:id="@+id/graph" />
     </RelativeLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="Set 1: Initial Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fromBottonM"
+            android:onClick="setFrom"
+            android:datePickerMode="spinner" />
+
+        <Button
+            android:text="Set 1: Final Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toButtonM"
+            android:onClick="setTo"
+            android:datePickerMode="spinner" />
+
+        <Button
+            android:text="Set 2: Initial Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fromBotton2M"
+            android:onClick="setFrom2"
+            android:datePickerMode="spinner" />
+
+        <Button
+            android:text="Set 2: Final Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toButton2M"
+            android:onClick="setTo2"
+            android:datePickerMode="spinner" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/diagnosticM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Moisture Graph placeholder"/>
+        android:text="Diagnostic"/>
 
 
 </LinearLayout>
-

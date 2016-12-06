@@ -22,6 +22,8 @@ public class MyPreferencesActivity extends PreferenceActivity {
         boolean bAppUpdates = SP.getBoolean("applicationUpdates",false);
         String downloadType = SP.getString("downloadType","1");
 
+
+
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment

@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //////CONNECTION TO DB///////////////////////////////////////////////////////////////////////////
         DataQuery dq;
         ReadingsAnalizer ra = new ReadingsAnalizer();

@@ -7,9 +7,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moisture Graph"
+            android:textSize="25dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="90dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="15dp"
+            />
+
         <com.jjoe64.graphview.GraphView
             android:layout_width="match_parent"
-            android:layout_height="200dip"
+            android:layout_height="326dip"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="20dp"
             android:id="@+id/graph" />
     </RelativeLayout>
 
@@ -23,6 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/fromBottonM"
+            android:background="@drawable/buttonshape"
+            android:textColor="@android:color/white"
             android:onClick="setFrom"
             android:datePickerMode="spinner" />
 
@@ -31,6 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toButtonM"
+            android:background="@drawable/buttonshape"
+            android:textColor="@android:color/white"
             android:onClick="setTo"
             android:datePickerMode="spinner" />
 
@@ -39,6 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/fromBotton2M"
+            android:background="@drawable/buttonshape"
+            android:textColor="@android:color/white"
             android:onClick="setFrom2"
             android:datePickerMode="spinner" />
 
@@ -47,6 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/toButton2M"
+            android:background="@drawable/buttonshape"
+            android:textColor="@android:color/white"
             android:onClick="setTo2"
             android:datePickerMode="spinner" />
     </LinearLayout>
@@ -59,3 +80,4 @@
 
 
 </LinearLayout>
+

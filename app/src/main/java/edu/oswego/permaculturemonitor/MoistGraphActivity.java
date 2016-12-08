@@ -56,9 +56,9 @@ public class MoistGraphActivity extends AppCompatActivity {
     private Timestamp toTS2 = Timestamp.valueOf("2016-12-10 00:00:00");
     ///////END DATE PICKER STUFF////////////////////////////////////////////////////////////////////////////////////////
 
-    LineGraphSeries<DataPoint> moistseries1,moistseries2;
+    LineGraphSeries<DataPoint> theseries1,theseries2;
     DataPoint[] dataPoints1,dataPoints2;
-    private Graph moistgraph;
+    private Graph thegraph;
     private int lastX = 0;
 
 
@@ -106,21 +106,22 @@ public class MoistGraphActivity extends AppCompatActivity {
         Reading read = new Reading();
         //create readingsanalizers: one for each type of reading
 
-        GraphView moistGraph = (GraphView) findViewById(R.id.graph);
-        moistseries1 = new LineGraphSeries<>();
-        moistGraph.getGridLabelRenderer().setVerticalAxisTitle("Value");
-        moistGraph.getGridLabelRenderer().setHorizontalAxisTitle("Date");
-        moistGraph.getViewport().setScrollable(true);
-        moistGraph.getViewport().setScalableY(true);
+        GraphView theGraph = (GraphView) findViewById(R.id.graph);
+        theseries1 = new LineGraphSeries<>();
+        theGraph.getGridLabelRenderer().setVerticalAxisTitle("Value");
+        theGraph.getGridLabelRenderer().setHorizontalAxisTitle("Date");
+        theGraph.getViewport().setScrollable(true);
+        theGraph.getViewport().setScalableY(true);
+        theGraph.getViewport().setScalable(true);
 
-        moistGraph.addSeries(moistseries1);
+        theGraph.addSeries(theseries1);
 
 /////////END GRAPH VIEW STUFF///////////////////////////////////////////////////////////////////////////////////////
     }
 /////////GRAPH STUFF//////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void addEntry() {
         //UNUSED
-        moistseries1.appendData((moistgraph.getSeries()[lastX++]), true, moistgraph.getSeries().length);
+        theseries1.appendData((thegraph.getSeries()[lastX++]), true, thegraph.getSeries().length);
     }
     public void onResume() {
         //UNUSED
@@ -161,33 +162,33 @@ public class MoistGraphActivity extends AppCompatActivity {
     @SuppressWarnings("deprecation")
     public void setFrom(View view) {
         showDialog(FROM_DIALOG);
-        Toast.makeText(getApplicationContext(), "from",
-                Toast.LENGTH_SHORT)
-                .show();
+        //Toast.makeText(getApplicationContext(), "from",
+        //        Toast.LENGTH_SHORT)
+        //        .show();
     }
 
     @SuppressWarnings("deprecation")
     public void setTo(View view) {
         showDialog(TO_DIALOG);
-        Toast.makeText(getApplicationContext(), "to",
-                Toast.LENGTH_SHORT)
-                .show();
+        //Toast.makeText(getApplicationContext(), "to",
+        //       Toast.LENGTH_SHORT)
+        //       .show();
     }
 
     @SuppressWarnings("deprecation")
     public void setFrom2(View view) {
         showDialog(FROM_DIALOG2);
-        Toast.makeText(getApplicationContext(), "from",
-                Toast.LENGTH_SHORT)
-                .show();
+        //Toast.makeText(getApplicationContext(), "from",
+        //        Toast.LENGTH_SHORT)
+        //       .show();
     }
 
     @SuppressWarnings("deprecation")
     public void setTo2(View view) {
         showDialog(TO_DIALOG2);
-        Toast.makeText(getApplicationContext(), "to",
-                Toast.LENGTH_SHORT)
-                .show();
+        //Toast.makeText(getApplicationContext(), "to",
+                //Toast.LENGTH_SHORT)
+                //.show();
     }
 
     @Override
@@ -240,6 +241,8 @@ public class MoistGraphActivity extends AppCompatActivity {
                             else
                                 fromTS = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
                             Log.v("DatePicker from",fromTS.toString());
+
+                            Toast.makeText(getApplicationContext(), fromTS.toString(), Toast.LENGTH_LONG).show();
                             testTime();//just a test, not needed
                             break;
                         case 2://to
@@ -256,6 +259,7 @@ public class MoistGraphActivity extends AppCompatActivity {
                             else
                                 toTS = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
                             Log.v("DatePicker to",toTS.toString());
+                            Toast.makeText(getApplicationContext(), toTS.toString(), Toast.LENGTH_LONG).show();
                             testTime();//just a test, not needed
                             break;
 
@@ -275,6 +279,7 @@ public class MoistGraphActivity extends AppCompatActivity {
                             else
                                 fromTS2 = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
                             Log.v("DatePicker from",fromTS2.toString());
+                            Toast.makeText(getApplicationContext(), fromTS2.toString(), Toast.LENGTH_LONG).show();
                             testTime();//just a test, not needed
                             break;
                         case 4://to
@@ -291,6 +296,7 @@ public class MoistGraphActivity extends AppCompatActivity {
                             else
                                 toTS2 = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
                             Log.v("DatePicker to",toTS2.toString());
+                            Toast.makeText(getApplicationContext(), fromTS2.toString(), Toast.LENGTH_LONG).show();
                             testTime();//just a test, not needed
                             break;
 
@@ -299,24 +305,26 @@ public class MoistGraphActivity extends AppCompatActivity {
                             Log.e("DatePicker","Bad flag");
                             break;
                     }
+
+
                     dataPoints1 = updateDataSet1();//set 1
                     dataPoints2 = updateDataSet2();
 
 ////////////////////////////////////////////
-                    //moistgraph = new Graph(0, 100,0, 40, 10, 10, moistra.getList());
-                    GraphView moistGraph = (GraphView) findViewById(R.id.graph);
+                    //thegraph = new Graph(0, 100,0, 40, 10, 10, moistra.getList());
+                    GraphView theGraph = (GraphView) findViewById(R.id.graph);
                     //phSeries = new LineGraphSeries<>(hmgraph.getSeries());
-                    moistseries1 = new LineGraphSeries<>(dataPoints1);
-                    moistseries2 = new LineGraphSeries<>(dataPoints2);
+                    theseries1 = new LineGraphSeries<>(dataPoints1);
+                    theseries2 = new LineGraphSeries<>(dataPoints2);
                     //humGraph.addSeries(phSeries);
-                    moistGraph.removeAllSeries();
-                    moistGraph.addSeries(moistseries1);
-                    moistGraph.addSeries(moistseries2);
+                    theGraph.removeAllSeries();
+                    theGraph.addSeries(theseries1);
+                    theGraph.addSeries(theseries2);
 
-                    moistGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext()));
-                    moistGraph.getGridLabelRenderer().setNumHorizontalLabels(3);
-                    moistGraph.getGridLabelRenderer().setNumVerticalLabels(5);
-                    moistGraph.getGridLabelRenderer().setHumanRounding(false);
+                    theGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext()));
+                    theGraph.getGridLabelRenderer().setNumHorizontalLabels(3);
+                    theGraph.getGridLabelRenderer().setNumVerticalLabels(3);
+                    theGraph.getGridLabelRenderer().setHumanRounding(false);
 // //////////////////////////////////////////
 
 

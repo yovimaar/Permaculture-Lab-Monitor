@@ -3,7 +3,11 @@ package edu.oswego.permaculturemonitor;
 /**
  * Created by chrisrk192 on 11/4/2016.
  */
-
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import java.util.ArrayList;
 import java.lang.Math;
@@ -117,17 +121,26 @@ public class ReadingsAnalizer {
         return healthy;
     }
 
-    public boolean isSetHealthy(){
+    public boolean isSetHealthy(float low, float high){
         boolean healthy = true;
         float dev, mean;
-
         dev = calcStdDev();
         mean = getAverage();
         if(list != null) {
+
+
+
+
+            //check the STD DEV for health
             for (int i = 0; i < list.size(); i++) {
                 if (!isHealthyReading(list.get(i), dev, mean))
                     healthy = false;
+                else if(list.get(i).getValue() > high || list.get(i).getValue() < low )
+                    healthy = false;
             }
+            //check if any are null or 0
+
+
         } else {Log.v("ReadingsAnalizer","Attempt to calculate with null list");}
         return healthy;
     }
@@ -135,7 +148,7 @@ public class ReadingsAnalizer {
     /** Returns a list of unhealthy readings
      * isSetHealthy should be called before this to see if there are any unhealthy
      */
-    public ArrayList<Reading> getUnhealthyReadings(){
+    public ArrayList<Reading> getUnhealthyReadings(float low, float high){
         ArrayList<Reading> unhealthy = new ArrayList<Reading>();
         float dev = calcStdDev();
         float mean = getAverage();
@@ -144,6 +157,8 @@ public class ReadingsAnalizer {
         if(list != null) {
             for (int i = 0; i < list.size(); i++) {
                 if (!isHealthyReading(list.get(i), dev, mean))
+                    unhealthy.add(list.get(i).clone()); //copy the unhealty reading
+                else if(list.get(i).getValue() > high || list.get(i).getValue() < low )
                     unhealthy.add(list.get(i).clone()); //copy the unhealty reading
             }
         } else {Log.v("ReadingsAnalizer","Attempt to calculate with null list");}

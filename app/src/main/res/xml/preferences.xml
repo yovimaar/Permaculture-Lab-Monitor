@@ -1,16 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <EditTextPreference android:title="Your Name"
-        android:key="username"
-        android:summary="Please provide your username"></EditTextPreference>
-    <CheckBoxPreference android:title="Application Updates"
-        android:defaultValue="false"
-        android:summary="This option if selected will allow the application to check for latest versions."
-        android:key="applicationUpdates" />
-    <ListPreference     android:title="Download Details"
-        android:summary="Select the kind of data that you would like to download"
-        android:key="downloadType"
+
+    <EditTextPreference android:title="PH High"
+        android:key="lowPh"
+        android:summary="Please provide a value">
+        android:defaultValue="7"
+        android:numeric="integer"
+
+    </EditTextPreference>
+    <EditTextPreference android:title="PH Low"
+        android:key="highPh"
+        android:summary="Please provide a value">
+        android:defaultValue="5"
+        android:numeric="integer"
+
+    </EditTextPreference>
+    <EditTextPreference android:title="Moisture High"
+        android:key="highMoist"
+        android:summary="Please provide a value">
+        android:defaultValue="100"
+        android:numeric="integer"
+
+    </EditTextPreference>
+    <EditTextPreference android:title="Moisture Low"
+        android:key="lowMoist"
+        android:summary="Please provide a value">
         android:defaultValue="1"
-        android:entries="@array/listArray"
-        android:entryValues="@array/listValues" />
+        android:numeric="integer"
+
+    </EditTextPreference>
+    <EditTextPreference android:title="Humidity High"
+        android:key="highHumid"
+        android:summary="Please provide a value">
+        android:defaultValue="45"
+        android:numeric="integer"
+
+    </EditTextPreference>
+    <EditTextPreference android:title="Humidity Low"
+        android:key="lowHumid"
+        android:summary="Please provide a value">
+        android:defaultValue="35"
+        android:numeric="integer"
+
+    </EditTextPreference>
+    <EditTextPreference android:title="Temperature High"
+        android:key="highTemp"
+        android:summary="Please provide a value">
+        android:defaultValue="90"
+        android:numeric="integer"
+
+    </EditTextPreference>
+    <EditTextPreference android:title="Temperature Low"
+        android:key="lowTemp"
+        android:summary="Please provide a value">
+        android:defaultValue="32"
+        android:numeric="integer"
+
+    </EditTextPreference>
+
+
 </PreferenceScreen>

@@ -1,7 +1,9 @@
 package edu.oswego.permaculturemonitor;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -49,10 +52,15 @@ public class MoistMapActivity  extends FragmentActivity implements OnMapReadyCal
         mMap = googleMap;
 
         DataQuery dq = new DataQuery();
-        //populate the lists
-        List<WeightedLatLng> weightedList = dq.getWeightedFromZone(3);
-        List<LatLng> list = dq.getLatLngFromZone(3);
-
+        List<WeightedLatLng> weightedList ;
+        List<LatLng> list;
+        //populate the lists with a priming read
+        weightedList = (dq.getWeightedFromZone(1, 1));////////////////WILL HAVE TO CHANGE SECOND PARAMETER BASED ON WHAT TYPE OF VALUE YOU WANT//////////////
+        list = (dq.getLatLngFromZone(1, 1));////////////////WILL HAVE TO CHANGE SECOND PARAMETER BASED ON WHAT TYPE OF VALUE YOU WANT//////////////
+        for(int i = 2; i < 5; i++) {
+            weightedList.addAll(dq.getWeightedFromZone(i, 1));////////////////WILL HAVE TO CHANGE SECOND PARAMETER BASED ON WHAT TYPE OF VALUE YOU WANT//////////////
+            list.addAll(dq.getLatLngFromZone(i, 1));////////////////WILL HAVE TO CHANGE SECOND PARAMETER BASED ON WHAT TYPE OF VALUE YOU WANT//////////////
+        }
         //test if they worked
         for(int i = 0; i < weightedList.size(); i++ ){
             Log.v("WeightedLatLng",i + " " + weightedList.get(i).toString());
@@ -67,26 +75,38 @@ public class MoistMapActivity  extends FragmentActivity implements OnMapReadyCal
                 Color.rgb(102, 225, 0), // green
                 Color.rgb(255, 0, 0)    // red
         };
-
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String lowString = SP.getString("lowMoist","0");
+        String highString = SP.getString("highMoist","100");
+        float low,high;
+        low = (float)Integer.valueOf(lowString);
+        high = (float)Integer.valueOf(highString);
         float[] startPoints = {
-                1f, 40f
+                //////////////THIS WOULD CHANGE FROM MAP TO MAP> SHOULD GET FROM PREFERENCES///////////////////////////////////////////////////////////////////////////////
+                low,high
         };
 
         Gradient gradient = new Gradient(colors, startPoints);
         // Create a heat map tile provider, passing it the latlngs
-        mProvider = new HeatmapTileProvider.Builder()
-                .weightedData(weightedList)
-                .gradient(gradient)
-                //.data(list)
-                .build();
-        // Add a tile overlay to the map, using the heat map tile provider.
-        mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
-
+        if(weightedList != null) {
+            mProvider = new HeatmapTileProvider.Builder()
+                    .weightedData(weightedList)
+                    .gradient(gradient)
+                    //.data(list)
+                    .build();
+            // Add a tile overlay to the map, using the heat map tile provider.
+            mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+        }
         //addHeatMap();
 
 
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(43.4557519, -76.5384007), 19));////////////////////////////////////////////////////////////////////////////////
+        CameraPosition cp = new CameraPosition.Builder()
+                .target(new LatLng(43.4557519, -76.5384007))
+                .zoom(19)
+                .bearing(90)
+                .build();
+        //mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new LatLng(43.4557519, -76.5384007), 19));
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
         //Add polygon sections to the map
         //Section 1
         mMap.addPolygon(new PolygonOptions().add(new LatLng(43.4557519, -76.5384007),
@@ -100,7 +120,7 @@ public class MoistMapActivity  extends FragmentActivity implements OnMapReadyCal
                 new LatLng(43.4559174, -76.5380922),
                 new LatLng(43.4558989, -76.5381727),
                 new LatLng(43.4557782, -76.5383886),
-                new LatLng(43.4557519, -76.5384007)).strokeColor(Color.RED).fillColor(Color.TRANSPARENT));
+                new LatLng(43.4557519, -76.5384007)).strokeColor(Color.RED).fillColor(Color.LTGRAY));
         //Section 2
         mMap.addPolygon(new PolygonOptions().add(new LatLng(43.45586, -76.5390994),
                 new LatLng(43.455784, -76.5389733),
@@ -118,7 +138,7 @@ public class MoistMapActivity  extends FragmentActivity implements OnMapReadyCal
                 new LatLng(43.4557928, -76.538752),
                 new LatLng(43.4557811, -76.5387507),
                 new LatLng(43.4557782, -76.5388419),
-                new LatLng(43.45586, -76.5390994)).strokeColor(Color.RED).fillColor(Color.TRANSPARENT));
+                new LatLng(43.45586, -76.5390994)).strokeColor(Color.RED).fillColor(Color.LTGRAY));
         //Section 3
         mMap.addPolygon(new PolygonOptions().add(new LatLng(43.4558502, -76.5392335),
                 new LatLng(43.4557753, -76.5392174),
@@ -137,7 +157,7 @@ public class MoistMapActivity  extends FragmentActivity implements OnMapReadyCal
                 new LatLng(43.455749, -76.5389559),
                 new LatLng(43.4557947, -76.5390417),
                 new LatLng(43.4558541, -76.5391155),
-                new LatLng(43.4558502, -76.5392335)).strokeColor(Color.RED).fillColor(Color.TRANSPARENT));
+                new LatLng(43.4558502, -76.5392335)).strokeColor(Color.RED).fillColor(Color.LTGRAY));
         //Section 4
         mMap.addPolygon(new PolygonOptions().add(new LatLng(43.4555221, -76.5391597),
                 new LatLng(43.4555027, -76.5391302),
@@ -150,11 +170,10 @@ public class MoistMapActivity  extends FragmentActivity implements OnMapReadyCal
                 new LatLng(43.4556429, -76.5386434),
                 new LatLng(43.4555835, -76.5387976),
                 new LatLng(43.4555397, -76.5389934),
-                new LatLng(43.4555221, -76.5391597)).strokeColor(Color.RED).fillColor(Color.TRANSPARENT));
+                new LatLng(43.4555221, -76.5391597)).strokeColor(Color.RED).fillColor(Color.LTGRAY));
         //Set bounds so the user can't go to the other side of the world.
-        LatLng boundA = new LatLng(43.45, -76.53);
-        LatLng boundB = new LatLng(43.46, -76.54);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(43.4557519, -76.5384007)));
+
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(43.4557519, -76.5384007)));
         //LatLngBounds boundary = new LatLngBounds(boundA, boundB);
         //mMap.setLatLngBoundsForCameraTarget(boundary);
         //Add a marker for each section
@@ -172,9 +191,15 @@ public class MoistMapActivity  extends FragmentActivity implements OnMapReadyCal
 
     private void addHeatMap(){
         DataQuery dq = new DataQuery();
-        //populate the lists
-        List<WeightedLatLng> weightedList = dq.getWeightedFromZone(3);
-        List<LatLng> list = dq.getLatLngFromZone(3);
+        List<WeightedLatLng> weightedList ;
+        List<LatLng> list;
+        //populate the lists with a priming read
+        weightedList = (dq.getWeightedFromZone(1, 1));////////////////WILL HAVE TO CHANGE SECOND PARAMETER BASED ON WHAT TYPE OF VALUE YOU WANT//////////////
+        list = (dq.getLatLngFromZone(1, 1));////////////////WILL HAVE TO CHANGE SECOND PARAMETER BASED ON WHAT TYPE OF VALUE YOU WANT//////////////
+        for(int i = 2; i < 5; i++) {
+            weightedList.addAll(dq.getWeightedFromZone(i, 1));////////////////WILL HAVE TO CHANGE SECOND PARAMETER BASED ON WHAT TYPE OF VALUE YOU WANT//////////////
+            list.addAll(dq.getLatLngFromZone(i, 1));////////////////WILL HAVE TO CHANGE SECOND PARAMETER BASED ON WHAT TYPE OF VALUE YOU WANT//////////////
+        }
 
         //test if they worked
         for(int i = 0; i < weightedList.size(); i++ ){
@@ -190,21 +215,27 @@ public class MoistMapActivity  extends FragmentActivity implements OnMapReadyCal
                 Color.rgb(102, 225, 0), // green
                 Color.rgb(255, 0, 0)    // red
         };
-
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String lowString = SP.getString("lowMoist","0");
+        String highString = SP.getString("highMoist","100");
+        float low,high;
+        low = (float)Integer.valueOf(lowString);
+        high = (float)Integer.valueOf(highString);
         float[] startPoints = {
-                1f, 40f
+                //////////////THIS WOULD CHANGE FROM MAP TO MAP> SHOULD GET FROM PREFERENCES///////////////////////////////////////////////////////////////////////////////
+                low,high
         };
-
         Gradient gradient = new Gradient(colors, startPoints);
         // Create a heat map tile provider, passing it the latlngs
-        mProvider = new HeatmapTileProvider.Builder()
-                .weightedData(weightedList)
-                .gradient(gradient)
-                //.data(list)
-                .build();
-        // Add a tile overlay to the map, using the heat map tile provider.
-        mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
-
+        if(weightedList != null) {
+            mProvider = new HeatmapTileProvider.Builder()
+                    .weightedData(weightedList)
+                    .gradient(gradient)
+                    //.data(list)
+                    .build();
+            // Add a tile overlay to the map, using the heat map tile provider.
+            mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+        }
 
 
 

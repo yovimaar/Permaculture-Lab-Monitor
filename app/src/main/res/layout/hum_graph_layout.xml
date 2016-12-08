@@ -3,47 +3,78 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Humidity Graph"
+            android:textSize="25dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="95dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="15dp"
+            />
+
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="326dip"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/graph" />
+    </RelativeLayout>
+
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
-            android:text="Set1:INIT"
-            android:layout_width="wrap_content"
+            android:text="Set 1: Initial Date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/fromBottonH"
+            android:id="@+id/fromBottonM"
+            android:background="@drawable/buttonshape"
+            android:textColor="@android:color/white"
             android:onClick="setFrom"
             android:datePickerMode="spinner" />
 
         <Button
-            android:text="Set1:FIN"
-            android:layout_width="wrap_content"
+            android:text="Set 1: Final Date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/toButtonH"
+            android:id="@+id/toButtonM"
+            android:background="@drawable/buttonshape"
+            android:textColor="@android:color/white"
             android:onClick="setTo"
             android:datePickerMode="spinner" />
 
         <Button
-            android:text="Set2:INIT"
-            android:layout_width="wrap_content"
+            android:text="Set 2: Initial Date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/fromBotton2H"
+            android:id="@+id/fromBotton2M"
+            android:background="@drawable/buttonshape"
+            android:textColor="@android:color/white"
             android:onClick="setFrom2"
             android:datePickerMode="spinner" />
 
         <Button
-            android:text="Set2:FIN"
-            android:layout_width="86dp"
+            android:text="Set 2: Final Date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/toButton2H"
+            android:id="@+id/toButton2M"
+            android:background="@drawable/buttonshape"
+            android:textColor="@android:color/white"
             android:onClick="setTo2"
             android:datePickerMode="spinner" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/diagnosticH"
+        android:id="@+id/diagnosticM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Humidity Graph placeholder"/>
+        android:text="Diagnostic"/>
 </LinearLayout>

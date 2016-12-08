@@ -1,26 +1,40 @@
 package edu.oswego.permaculturemonitor;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.sql.Connection;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import android.widget.Button;
+
+import android.widget.DatePicker;
+import android.widget.Toast;
 import java.util.Calendar;
+import java.util.Date;
+
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 /**
  * Created by Vi on 12/1/16.
  */
 
-public class TempGraphActivity  extends AppCompatActivity {
+public class TempGraphActivity extends AppCompatActivity {
     ///////Datepicker stuff/////////////////////////////////////////////////////////////////////////////////////////
     //Christopher King 12/1/2016
     Connection con;
@@ -41,15 +55,21 @@ public class TempGraphActivity  extends AppCompatActivity {
     private Timestamp fromTS2 = Timestamp.valueOf("2016-10-10 00:00:00");
     private Timestamp toTS2 = Timestamp.valueOf("2016-12-10 00:00:00");
     ///////END DATE PICKER STUFF////////////////////////////////////////////////////////////////////////////////////////
+
+    LineGraphSeries<DataPoint> theseries1,theseries2;
+    DataPoint[] dataPoints1,dataPoints2;
+    private Graph thegraph;
+    private int lastX = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.temp_graph_layout);
 
-
         ///////Datepicker stuff/////////////////////////////////////////////////////////////////////////////////////////
         //Christopher King 12/1/2016
-        dateView = (TextView) findViewById(R.id.diagnosticT);
+        dateView = (TextView) findViewById(R.id.diagnosticM);
         //sets the current date and feeds that into the dialog so they apprear with 2016 not 1947
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -72,40 +92,99 @@ public class TempGraphActivity  extends AppCompatActivity {
             toTS2 = Timestamp.valueOf(year + "-" + month + "-" + day + " 00:00:00");
         }
         Log.v("DatePicker to", toTS.toString());
+
         ///////END DATE PICKER STUFF////////////////////////////////////////////////////////////////////////////////////////
 
 
+        //////////GRAPH VIEW STUFF//////////////////////////////////////////////////////////////////////////////////////////
+        DataQuery dq = new DataQuery();
+        //create reading
+        Reading read = new Reading();
+        //create readingsanalizers: one for each type of reading
+
+        GraphView theGraph = (GraphView) findViewById(R.id.graph);
+        theseries1 = new LineGraphSeries<>();
+        theGraph.getGridLabelRenderer().setVerticalAxisTitle("Value");
+        theGraph.getGridLabelRenderer().setHorizontalAxisTitle("Date");
+        theGraph.getViewport().setScrollable(true);
+        theGraph.getViewport().setScalableY(true);
+        theGraph.getViewport().setScalable(true);
+
+        theGraph.addSeries(theseries1);
+
+/////////END GRAPH VIEW STUFF///////////////////////////////////////////////////////////////////////////////////////
     }
+    /////////GRAPH STUFF//////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void addEntry() {
+        //UNUSED
+        theseries1.appendData((thegraph.getSeries()[lastX++]), true, thegraph.getSeries().length);
+    }
+    public void onResume() {
+        //UNUSED
+        //simulate real time with thread that appends data to the graph
+        final DataQuery dq = new DataQuery();
+        super.onResume();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                for (int i = 0; i < dq.getLatestTemps().size(); i++) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            addEntry();
+                        }
+                    });
+                    //sleep to slow down the add of entries
+                    try {
+                        Thread.sleep(600);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+/////////END GRAPH STUFF//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
     ///////Datepicker stuff/////////////////////////////////////////////////////////////////////////////////////
+
     @SuppressWarnings("deprecation")
     public void setFrom(View view) {
         showDialog(FROM_DIALOG);
-        Toast.makeText(getApplicationContext(), "from", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "from",
+        //        Toast.LENGTH_SHORT)
+        //        .show();
     }
 
     @SuppressWarnings("deprecation")
     public void setTo(View view) {
         showDialog(TO_DIALOG);
-        Toast.makeText(getApplicationContext(), "to",
-                Toast.LENGTH_SHORT)
-                .show();
+        //Toast.makeText(getApplicationContext(), "to",
+        //       Toast.LENGTH_SHORT)
+        //       .show();
     }
 
     @SuppressWarnings("deprecation")
     public void setFrom2(View view) {
         showDialog(FROM_DIALOG2);
-        Toast.makeText(getApplicationContext(), "from",
-                Toast.LENGTH_SHORT)
-                .show();
+        //Toast.makeText(getApplicationContext(), "from",
+        //        Toast.LENGTH_SHORT)
+        //       .show();
     }
 
     @SuppressWarnings("deprecation")
     public void setTo2(View view) {
         showDialog(TO_DIALOG2);
-        Toast.makeText(getApplicationContext(), "to",
-                Toast.LENGTH_SHORT)
-                .show();
+        //Toast.makeText(getApplicationContext(), "to",
+        //Toast.LENGTH_SHORT)
+        //.show();
     }
 
     @Override
@@ -142,24 +221,22 @@ public class TempGraphActivity  extends AppCompatActivity {
                     //arg1 = year;
                     //arg2 = month;
                     //arg3 = day;
-                    switch (dateFlag) {
+                    switch (dateFlag){
                         case 1://from
                             year_from = arg1;
                             month_from = arg2;
                             day_from = arg3;
                             //or
                             //ERRORS ARE THROWN IF THE MONTH IS LESS THAN 10 BECAUSE IT NEEDS 2 DIGITS
-                            if (arg3 < 10 && arg2 < 10)
+                            if(arg3 < 10 && arg2 < 10)
                                 fromTS = Timestamp.valueOf(arg1 + "-0" + arg2 + "-0" + arg3 + " 00:00:00");
-                            else if (arg3 < 10)
+                            else if(arg3 < 10)
                                 fromTS = Timestamp.valueOf(arg1 + "-" + arg2 + "-0" + arg3 + " 00:00:00");
-                            else if (arg2 < 10)
+                            else if(arg2 < 10)
                                 fromTS = Timestamp.valueOf(arg1 + "-0" + arg2 + "-" + arg3 + " 00:00:00");
                             else
                                 fromTS = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
-                            Log.v("DatePicker from", fromTS.toString());
-                            Toast.makeText(getApplicationContext(), "Date Set: "
-                                    + fromTS.toString(), Toast.LENGTH_SHORT).show();
+                            Log.v("DatePicker from",fromTS.toString());
                             testTime();//just a test, not needed
                             break;
                         case 2://to
@@ -167,17 +244,15 @@ public class TempGraphActivity  extends AppCompatActivity {
                             month_to = arg2;
                             day_to = arg3;
                             //ERRORS ARE THROWN IF THE MONTH IS LESS THAN 10 BECAUSE IT NEEDS 2 DIGITS
-                            if (arg3 < 10 && arg2 < 10)
+                            if(arg3 < 10 && arg2 < 10)
                                 toTS = Timestamp.valueOf(arg1 + "-0" + arg2 + "-0" + arg3 + " 00:00:00");
-                            else if (arg3 < 10)
+                            else if(arg3 < 10)
                                 toTS = Timestamp.valueOf(arg1 + "-" + arg2 + "-0" + arg3 + " 00:00:00");
-                            else if (arg2 < 10)
+                            else if(arg2 < 10)
                                 toTS = Timestamp.valueOf(arg1 + "-0" + arg2 + "-" + arg3 + " 00:00:00");
                             else
                                 toTS = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
-                            Log.v("DatePicker to", toTS.toString());
-                            Toast.makeText(getApplicationContext(), "Date Set: "
-                                    + toTS.toString(), Toast.LENGTH_SHORT).show();
+                            Log.v("DatePicker to",toTS.toString());
                             testTime();//just a test, not needed
                             break;
 
@@ -188,17 +263,15 @@ public class TempGraphActivity  extends AppCompatActivity {
                             day_from = arg3;
                             //or
                             //ERRORS ARE THROWN IF THE MONTH IS LESS THAN 10 BECAUSE IT NEEDS 2 DIGITS
-                            if (arg3 < 10 && arg2 < 10)
+                            if(arg3 < 10 && arg2 < 10)
                                 fromTS2 = Timestamp.valueOf(arg1 + "-0" + arg2 + "-0" + arg3 + " 00:00:00");
-                            else if (arg3 < 10)
+                            else if(arg3 < 10)
                                 fromTS2 = Timestamp.valueOf(arg1 + "-" + arg2 + "-0" + arg3 + " 00:00:00");
-                            else if (arg2 < 10)
+                            else if(arg2 < 10)
                                 fromTS2 = Timestamp.valueOf(arg1 + "-0" + arg2 + "-" + arg3 + " 00:00:00");
                             else
                                 fromTS2 = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
-                            Log.v("DatePicker from", fromTS2.toString());
-                            Toast.makeText(getApplicationContext(), "Date Set: "
-                                    + fromTS.toString(), Toast.LENGTH_SHORT).show();
+                            Log.v("DatePicker from",fromTS2.toString());
                             testTime();//just a test, not needed
                             break;
                         case 4://to
@@ -206,36 +279,57 @@ public class TempGraphActivity  extends AppCompatActivity {
                             month_to = arg2;
                             day_to = arg3;
                             //ERRORS ARE THROWN IF THE MONTH IS LESS THAN 10 BECAUSE IT NEEDS 2 DIGITS
-                            if (arg3 < 10 && arg2 < 10)
+                            if(arg3 < 10 && arg2 < 10)
                                 toTS2 = Timestamp.valueOf(arg1 + "-0" + arg2 + "-0" + arg3 + " 00:00:00");
-                            else if (arg3 < 10)
+                            else if(arg3 < 10)
                                 toTS2 = Timestamp.valueOf(arg1 + "-" + arg2 + "-0" + arg3 + " 00:00:00");
-                            else if (arg2 < 10)
+                            else if(arg2 < 10)
                                 toTS2 = Timestamp.valueOf(arg1 + "-0" + arg2 + "-" + arg3 + " 00:00:00");
                             else
                                 toTS2 = Timestamp.valueOf(arg1 + "-" + arg2 + "-" + arg3 + " 00:00:00");
-                            Log.v("DatePicker to", toTS2.toString());
-                            Toast.makeText(getApplicationContext(), "Date Set: "
-                                    + toTS.toString(), Toast.LENGTH_SHORT).show();
+                            Log.v("DatePicker to",toTS2.toString());
                             testTime();//just a test, not needed
                             break;
 
 
                         default:
-                            Log.e("DatePicker", "Bad flag");
-                            Toast.makeText(getApplicationContext(), "Bad Date Flag", Toast.LENGTH_SHORT).show();
+                            Log.e("DatePicker","Bad flag");
                             break;
                     }
+                    if((dataPoints1 = updateDataSet1()) == null)
+                        dataPoints1 = new DataPoint[0];
+                    //dataPoints1 = updateDataSet1();//set 1
+                    if((dataPoints2 = updateDataSet2()) == null)
+                        dataPoints2 = new DataPoint[0];
+                    //dataPoints2 = updateDataSet2();
+
+////////////////////////////////////////////
+                    //thegraph = new Graph(0, 100,0, 40, 10, 10, moistra.getList());
+                    GraphView theGraph = (GraphView) findViewById(R.id.graph);
+                    //phSeries = new LineGraphSeries<>(hmgraph.getSeries());
+                    theseries1 = new LineGraphSeries<>(dataPoints1);
+                    theseries2 = new LineGraphSeries<>(dataPoints2);
+                    //humGraph.addSeries(phSeries);
+                    theGraph.removeAllSeries();
+                    theGraph.addSeries(theseries1);
+                    theGraph.addSeries(theseries2);
+
+                    theGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext()));
+                    theGraph.getGridLabelRenderer().setNumHorizontalLabels(3);
+                    theGraph.getGridLabelRenderer().setNumVerticalLabels(3);
+                    theGraph.getGridLabelRenderer().setHumanRounding(false);
+// //////////////////////////////////////////
+
 
                 }
             };
 
-    public void testTime() {
+    public void testTime(){
         //JUST A TEST METHOD TO DISPLAY READINGS. REQUIRES A TextView with id diagnostic
         con = Connector.getInstance().getConnection();
         String d = "No readings";
-        TextView diag = (TextView) findViewById(R.id.diagnosticT);
-        if (con != null) {
+        TextView diag = (TextView) findViewById(R.id.diagnosticM);
+        if(con != null) {
             DataQuery dq = new DataQuery();
             ReadingsAnalizer ra = new ReadingsAnalizer();
             ArrayList<Reading> readings;
@@ -263,39 +357,56 @@ public class TempGraphActivity  extends AppCompatActivity {
         diag.setText(d);
     }
 
-    public void updateDataSets() {
+    public DataPoint[] updateDataSet1(){
         con = Connector.getInstance().getConnection();
-
-
-        if (con != null) {
+        if(con != null) {
             DataQuery dq = new DataQuery();
             ReadingsAnalizer ra = new ReadingsAnalizer();
-            ArrayList<Reading> readings, history;
-
+            ArrayList<Reading> readings;
 
             Log.v("Connection", "Not Null");
             readings = dq.getLatestTemps(fromTS, toTS);// Set1 buttons
-            history = dq.getLatestTemps(fromTS2, toTS2);// Set2 buttons
             Log.v("DATA SETS!!!!!!!!!", "FROM : " + fromTS.toString() + "\n" + "     TO: " + toTS.toString());
             Log.v("DATA SETS!!!!!!!!!", "FROM : " + fromTS2.toString() + "\n" + "     TO: " + toTS2.toString());
             if (readings != null) {
                 //UPDATE LISTS, OR PARSE READINGS TO GRAPHABLE FORMAT
+                DataPoint[] values = new DataPoint[readings.size()];
                 for (int i = 0; i < readings.size(); i++) {
-                    //TO DO
-
-
+                    Date x = readings.get(i).getTSasDate(); //PROBLEM HERE BECAUSE IT RETURNS AS A DOUBLE
+                    double y = (double) readings.get(i).getValue();
+                    DataPoint v = new DataPoint(x, y);
+                    values[i] = v;
                 }
-            }
+                return values;
+            } else {return null;}
+        }else {return null;}
+    }
+    public DataPoint[] updateDataSet2(){
+        con = Connector.getInstance().getConnection();
+        if(con != null) {
+            DataQuery dq = new DataQuery();
+            ReadingsAnalizer ra = new ReadingsAnalizer();
+            ArrayList<Reading> history;
+
+
+            Log.v("Connection", "Not Null");
+            history = dq.getLatestTemps(fromTS2,toTS2);// Set2 buttons
+            Log.v("DATA SETS!!!!!!!!!", "FROM : " + fromTS.toString() + "\n" + "     TO: " + toTS.toString());
+            Log.v("DATA SETS!!!!!!!!!", "FROM : " + fromTS2.toString() + "\n" + "     TO: " + toTS2.toString());
             if (history != null) {
                 //UPDATE LISTS, OR PARSE READINGS TO GRAPHABLE FORMAT
+                DataPoint[] values = new DataPoint[history.size()];
                 for (int i = 0; i < history.size(); i++) {
-                    //TO DO
-
-
+                    double x = (double) history.get(i).getTs().getTime(); //PROBLEM HERE BECAUSE IT RETURNS AS A DOUBLE
+                    double y = (double) history.get(i).getValue();
+                    DataPoint v = new DataPoint(x, y);
+                    values[i] = v;
                 }
-            }
-        }
-
+                return values;
+            } else {return null;}
+        }else {return null;}
     }
-//////////END DATEPICKER STUFF/////////////////////////////////////////////////////////////////////////////////
+
+    //////////END DATEPICKER STUFF/////////////////////////////////////////////////////////////////////////////////
+
 }

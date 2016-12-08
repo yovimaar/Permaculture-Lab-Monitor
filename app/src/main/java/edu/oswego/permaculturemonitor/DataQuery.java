@@ -135,7 +135,7 @@ public class DataQuery {
                     //Should increment through the result set and populate the arrayList
                     while (rs.next()) {
                         Reading read = new Reading();
-                        Log.v("Reading", ""
+                        Log.v("PH Reading", ""
                                 + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
                                 + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
                                 + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
@@ -165,8 +165,9 @@ public class DataQuery {
         Timestamp current = new Timestamp(System.currentTimeMillis());
         ArrayList<Reading> vals = new ArrayList<>();
         String query = "SELECT * FROM reading WHERE sensorID IN (SELECT id FROM sensor WHERE  " +
-                "typeID = '4' AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
-                + from.toString() + "' AND '" + current + "')";//may be 3
+                "typeID = '4') AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
+                + from.toString() + "' AND '" + current.toString() + "')";
+        Log.v("QUERY!!!!!!!!!!!!!", query);
         ResultSet rs;
         ResultSetMetaData metadata;
         int numberOfColumns;
@@ -186,7 +187,7 @@ public class DataQuery {
                     //Should increment through the result set and populate the arrayList
                     while (rs.next()) {
                         Reading read = new Reading();
-                        Log.v("Reading", ""
+                        Log.v("PH Reading", ""
                                 + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
                                 + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
                                 + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
@@ -216,8 +217,9 @@ public class DataQuery {
         Timestamp current = new Timestamp(System.currentTimeMillis());
         ArrayList<Reading> vals = new ArrayList<>();
         String query = "SELECT * FROM reading WHERE sensorID IN (SELECT id FROM sensor WHERE  " +
-                "typeID = '4' AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
-                + from.toString() + "' AND '" + to.toString() + "')";//may be 3
+                "typeID = '4') AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
+                + from.toString() + "' AND '" + to.toString() + "')";
+        Log.v("QUERY!!!!!!!!!!!!!", query);
         ResultSet rs;
         ResultSetMetaData metadata;
         int numberOfColumns;
@@ -237,7 +239,7 @@ public class DataQuery {
                     //Should increment through the result set and populate the arrayList
                     while (rs.next()) {
                         Reading read = new Reading();
-                        Log.v("Reading", ""
+                        Log.v("PH Reading", ""
                                 + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
                                 + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
                                 + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
@@ -287,7 +289,7 @@ public class DataQuery {
                     while (rs.next()) {
                         Reading read = new Reading();
 
-                        Log.v("Reading", ""
+                        Log.v("Hum Reading", ""
                                 + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
                                 + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
                                 + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
@@ -319,8 +321,9 @@ public class DataQuery {
         Timestamp current = new Timestamp(System.currentTimeMillis());
         ArrayList<Reading> vals = new ArrayList<>();
         String query = "SELECT * FROM reading WHERE sensorID IN (SELECT id FROM sensor WHERE  " +
-                "typeID = '3' AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
-                + from.toString() + "' AND '" + current + "')";//may be 4
+                "typeID = '3') AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
+                + from.toString() + "' AND '" + current.toString() + "')";
+        Log.v("QUERY!!!!!!!!!!!!!", query);
         ResultSet rs;
         ResultSetMetaData metadata;
         int numberOfColumns;
@@ -341,7 +344,7 @@ public class DataQuery {
                     while (rs.next()) {
                         Reading read = new Reading();
 
-                        Log.v("Reading", ""
+                        Log.v("HUM Reading", ""
                                 + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
                                 + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
                                 + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
@@ -373,8 +376,9 @@ public class DataQuery {
         Timestamp current = new Timestamp(System.currentTimeMillis());
         ArrayList<Reading> vals = new ArrayList<>();
         String query = "SELECT * FROM reading WHERE sensorID IN (SELECT id FROM sensor WHERE  " +
-                "typeID = '3' AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
-                + from.toString() + "' AND '" + to.toString() + "')";//may be 4
+                "typeID = '3') AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
+                + from.toString() + "' AND '" + to.toString() + "')";
+        Log.v("QUERY!!!!!!!!!!!!!", query);
         ResultSet rs;
         ResultSetMetaData metadata;
         int numberOfColumns;
@@ -395,7 +399,7 @@ public class DataQuery {
                     while (rs.next()) {
                         Reading read = new Reading();
 
-                        Log.v("Reading", ""
+                        Log.v("HUM Reading", ""
                                 + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
                                 + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
                                 + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
@@ -450,7 +454,7 @@ public class DataQuery {
                         while(rs.next()){
                             Reading read = new Reading();
 
-                            Log.v("Reading", ""
+                            Log.v("TP Reading", ""
                                     + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
                                     + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
                                     + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
@@ -484,8 +488,9 @@ public class DataQuery {
         Timestamp current = new Timestamp(System.currentTimeMillis());
         ArrayList<Reading> vals = new ArrayList<>();
         String query = "SELECT * FROM reading WHERE sensorID IN (SELECT id FROM sensor WHERE  " +
-                "typeID = '2' AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
-                + from.toString() + "' AND '" + current + "')";
+                "typeID = '2') AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
+                + from.toString() + "' AND '" + current.toString() + "')";
+        Log.v("QUERY!!!!!!!!!!!!!", query);
         ResultSet rs;
         ResultSetMetaData metadata;
         int numberOfColumns;
@@ -508,7 +513,7 @@ public class DataQuery {
                         while(rs.next()){
                             Reading read = new Reading();
 
-                            Log.v("Reading", ""
+                            Log.v("TP Reading", ""
                                     + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
                                     + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
                                     + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
@@ -542,8 +547,9 @@ public class DataQuery {
         Timestamp current = new Timestamp(System.currentTimeMillis());
         ArrayList<Reading> vals = new ArrayList<>();
         String query = "SELECT * FROM reading WHERE sensorID IN (SELECT id FROM sensor WHERE  " +
-                "typeID = '2' AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
+                "typeID = '2') AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
                 + from.toString() + "' AND '" + to.toString() + "')";
+        Log.v("QUERY!!!!!!!!!!!!!", query);
         ResultSet rs;
         ResultSetMetaData metadata;
         int numberOfColumns;
@@ -566,7 +572,7 @@ public class DataQuery {
                         while(rs.next()){
                             Reading read = new Reading();
 
-                            Log.v("Reading", ""
+                            Log.v("TP Reading", ""
                                     + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
                                     + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
                                     + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
@@ -616,7 +622,7 @@ public class DataQuery {
                     while(rs.next()) {
                         Reading read = new Reading();
 
-                        Log.v("Reading", ""
+                        Log.v("Mst Reading", ""
                                 + metadata.getColumnName(1) + ": " + rs.getInt(1) + "\n"
                                 + metadata.getColumnName(2) + ": " + rs.getInt(2) + "\n"
                                 + metadata.getColumnName(3) + ": " + rs.getFloat(3) + "\n"
@@ -647,7 +653,7 @@ public class DataQuery {
         ArrayList<Reading> vals = new ArrayList<>();
         String query = "SELECT * FROM reading WHERE sensorID IN (SELECT id FROM sensor WHERE  " +
                 "typeID = '1' AND ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
-                + from.toString() + "' AND '" + current + "')";
+                + from.toString() + "' AND '" + current.toString() + "')";
         Log.v("QUERY!!!!!!!", query);
         ResultSet rs;
         ResultSetMetaData metadata;
@@ -664,7 +670,7 @@ public class DataQuery {
                     metadata = rs.getMetaData();
                     while(rs.next()) {
                         Reading read = new Reading();
-                        Log.v("Reading", ""
+                        Log.v("Mst Reading", ""
                                 + metadata.getColumnName(1) + ": " + rs.getInt(1) + "\n"
                                 + metadata.getColumnName(2) + ": " + rs.getInt(2) + "\n"
                                 + metadata.getColumnName(3) + ": " + rs.getFloat(3) + "\n"
@@ -712,7 +718,7 @@ public class DataQuery {
                     metadata = rs.getMetaData();
                     while(rs.next()) {
                         Reading read = new Reading();
-                        Log.v("Reading", ""
+                        Log.v("Mst Reading", ""
                                 + metadata.getColumnName(1) + ": " + rs.getInt(1) + "\n"
                                 + metadata.getColumnName(2) + ": " + rs.getInt(2) + "\n"
                                 + metadata.getColumnName(3) + ": " + rs.getFloat(3) + "\n"
@@ -951,7 +957,7 @@ public class DataQuery {
         return vals;
     }
 
-    public List<WeightedLatLng> getWeightedFromZone(int zoneID){
+    public List<WeightedLatLng> getWeightedFromZone(int zoneID, int type){
         ArrayList<WeightedLatLng> list = new ArrayList<WeightedLatLng>();
         //get the data
         /////////////////////////////////////////////////////////////////
@@ -960,7 +966,7 @@ public class DataQuery {
         String query = "select zone.id,sensor.id, X(loc),Y(loc),reading.value, " +
                 "reading.ts from zone,sensor,reading where " +
                 "zone.id = '" + zoneID  +"' and ST_CONTAINS(zone.perimeter,sensor.loc) " +
-                "and sensor.id = reading.sensorId";
+                "and sensor.id = reading.sensorId and sensor.typeID = '"+ type +"'";
         ResultSet rs;
         ResultSetMetaData metadata;
         //Query
@@ -986,6 +992,137 @@ public class DataQuery {
                                 + metadata.getColumnName(4) + ": " + rs.getTimestamp(6)+ "\n"
                         );
                         //no need for zoneID
+
+                        read.setSensorID(rs.getInt(2));
+                        read.setX(rs.getFloat(3));
+                        read.setY(rs.getFloat(4));
+                        read.setValue(rs.getFloat(5));
+                        read.setTs(rs.getTimestamp(6));
+                        vals.add(read);
+                    }
+                }
+            }
+        }catch (Exception ex){
+            Log.e("Exceptions","");
+            ex.printStackTrace();
+            return null;
+        }
+        ///////////////////////////////////////////////////////////////////
+        //parse it
+        for (int i = 0; i < vals.size(); i++) {
+            double val = (double) vals.get(i).getValue();
+            double lat = (double)vals.get(i).getY();
+            double lng = (double)vals.get(i).getX();
+
+            list.add(new WeightedLatLng(new LatLng(lat,lng),val));
+        }
+        return list;
+    }
+    public List<WeightedLatLng> getWeightedFromZone(int zoneID, int type, Timestamp from){
+        ArrayList<WeightedLatLng> list = new ArrayList<WeightedLatLng>();
+        //get the data
+        /////////////////////////////////////////////////////////////////
+        Timestamp current = new Timestamp(System.currentTimeMillis());
+        ArrayList<Reading> vals = new ArrayList<>();
+        //returns zoneID sensorID loc value
+        String query = "select zone.id,sensor.id, X(loc),Y(loc),reading.value, " +
+                "reading.ts from zone,sensor,reading where " +
+                "zone.id = '" + zoneID  +"' and ST_CONTAINS(zone.perimeter,sensor.loc) " +
+                "and sensor.id = reading.sensorId and sensor.typeID = '"+ type +"' and " +
+                "ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
+                + from.toString() + "' AND '" + current + "')";
+
+        ResultSet rs;
+        ResultSetMetaData metadata;
+        //Query
+        try{
+            if(con == null){
+                //Error connecting to DataBase
+                Log.e("connection","Couldnt connect to to database!?!");
+            } else {
+                //just a test query
+                Statement stmt = con.createStatement();
+                rs = stmt.executeQuery(query);
+                if (rs.next()){
+                    Log.i("connection","it worked!");
+                    metadata = rs.getMetaData();
+                    while (rs.next()) {
+                        Reading read = new Reading();
+                        Log.v("Reading", ""
+                                + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
+                                + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(4)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getFloat(5)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getTimestamp(6)+ "\n"
+                        );
+                        //no need for zoneID
+
+                        read.setSensorID(rs.getInt(2));
+                        read.setX(rs.getFloat(3));
+                        read.setY(rs.getFloat(4));
+                        read.setValue(rs.getFloat(5));
+                        read.setTs(rs.getTimestamp(6));
+                        vals.add(read);
+                    }
+                }
+            }
+        }catch (Exception ex){
+            Log.e("Exceptions","");
+            ex.printStackTrace();
+            return null;
+        }
+        ///////////////////////////////////////////////////////////////////
+        //parse it
+        for (int i = 0; i < vals.size(); i++) {
+            double val = (double) vals.get(i).getValue();
+            double lat = (double)vals.get(i).getY();
+            double lng = (double)vals.get(i).getX();
+
+            list.add(new WeightedLatLng(new LatLng(lat,lng),val));
+        }
+        return list;
+    }
+    public List<WeightedLatLng> getWeightedFromZone(int zoneID, int type, Timestamp from, Timestamp to){
+        ArrayList<WeightedLatLng> list = new ArrayList<WeightedLatLng>();
+        //get the data
+        /////////////////////////////////////////////////////////////////
+        Timestamp current = new Timestamp(System.currentTimeMillis());
+        ArrayList<Reading> vals = new ArrayList<>();
+        //returns zoneID sensorID loc value
+        String query = "select zone.id,sensor.id, X(loc),Y(loc),reading.value, " +
+                "reading.ts from zone,sensor,reading where " +
+                "zone.id = '" + zoneID  +"' and ST_CONTAINS(zone.perimeter,sensor.loc) " +
+                "and sensor.id = reading.sensorId and sensor.typeID = '"+ type +"' and " +
+                "ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
+                + from.toString() + "' AND '" + to.toString() + "')";
+
+        ResultSet rs;
+        ResultSetMetaData metadata;
+        //Query
+        try{
+            if(con == null){
+                //Error connecting to DataBase
+                Log.e("connection","Couldnt connect to to database!?!");
+            } else {
+                //just a test query
+                Statement stmt = con.createStatement();
+                rs = stmt.executeQuery(query);
+                if (rs.next()){
+                    Log.i("connection","it worked!");
+                    metadata = rs.getMetaData();
+                    while (rs.next()) {
+                        Reading read = new Reading();
+                        Log.v("Reading", ""
+                                + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
+                                + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(4)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getFloat(5)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getTimestamp(6)+ "\n"
+                        );
+                        //no need for zoneID
+
                         read.setSensorID(rs.getInt(2));
                         read.setX(rs.getFloat(3));
                         read.setY(rs.getFloat(4));
@@ -1012,7 +1149,8 @@ public class DataQuery {
         return list;
     }
 
-    public List<LatLng> getLatLngFromZone(int zoneID){
+
+    public List<LatLng> getLatLngFromZone(int zoneID, int type){
         ArrayList<LatLng> list = new ArrayList<LatLng>();
         //get the data
         /////////////////////////////////////////////////////////////////
@@ -1021,7 +1159,7 @@ public class DataQuery {
         String query = "select zone.id,sensor.id, X(loc),Y(loc),reading.value, " +
                 "reading.ts from zone,sensor,reading where " +
                 "zone.id = '" + zoneID  +"' and ST_CONTAINS(zone.perimeter,sensor.loc) " +
-                "and sensor.id = reading.sensorId";
+                "and sensor.id = reading.sensorId and sensor.typeID = '"+ type +"'";
         ResultSet rs;
         ResultSetMetaData metadata;
         //Query
@@ -1070,6 +1208,129 @@ public class DataQuery {
         }
         return list;
     }
+    public List<LatLng> getLatLngFromZone(int zoneID, int type, Timestamp from){
+        ArrayList<LatLng> list = new ArrayList<LatLng>();
+        //get the data
+        /////////////////////////////////////////////////////////////////
+        Timestamp current = new Timestamp(System.currentTimeMillis());
+        ArrayList<Reading> vals = new ArrayList<>();
+        //returns zoneID sensorID loc value
+        String query = "select zone.id,sensor.id, X(loc),Y(loc),reading.value, " +
+                "reading.ts from zone,sensor,reading where " +
+                "zone.id = '" + zoneID  +"' and ST_CONTAINS(zone.perimeter,sensor.loc) " +
+                "and sensor.id = reading.sensorId and sensor.typeID = '"+ type +"' and " +
+                "ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
+                + from.toString() + "' AND '" + current + "')";
+        ResultSet rs;
+        ResultSetMetaData metadata;
+        //Query
+        try{
+            if(con == null){
+                //Error connecting to DataBase
+                Log.e("connection","Couldnt connect to to database!?!");
+            } else {
+                //just a test query
+                Statement stmt = con.createStatement();
+                rs = stmt.executeQuery(query);
+                if (rs.next()){
+                    Log.i("connection","it worked!");
+                    metadata = rs.getMetaData();
+                    while (rs.next()) {
+                        Reading read = new Reading();
+                        Log.v("Reading", ""
+                                + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
+                                + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(4)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getFloat(5)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getTimestamp(6)+ "\n"
+                        );
+                        //no need for zoneID
+                        read.setSensorID(rs.getInt(2));
+                        read.setX(rs.getFloat(3));
+                        read.setY(rs.getFloat(4));
+                        read.setValue(rs.getFloat(5));
+                        read.setTs(rs.getTimestamp(6));
+                        vals.add(read);
+                    }
+                }
+            }
+        }catch (Exception ex){
+            Log.e("Exceptions","");
+            ex.printStackTrace();
+            return null;
+        }
+        ///////////////////////////////////////////////////////////////////
+        //parse it
+        for (int i = 0; i < vals.size(); i++) {
+            double lat = (double)vals.get(i).getY();
+            double lng = (double)vals.get(i).getX();
+            list.add(new LatLng(lat,lng));
+        }
+        return list;
+    }
+    public List<LatLng> getLatLngFromZone(int zoneID, int type, Timestamp from, Timestamp to){
+        ArrayList<LatLng> list = new ArrayList<LatLng>();
+        //get the data
+        /////////////////////////////////////////////////////////////////
+        Timestamp current = new Timestamp(System.currentTimeMillis());
+        ArrayList<Reading> vals = new ArrayList<>();
+        //returns zoneID sensorID loc value
+        String query = "select zone.id,sensor.id, X(loc),Y(loc),reading.value, " +
+                "reading.ts from zone,sensor,reading where " +
+                "zone.id = '" + zoneID  +"' and ST_CONTAINS(zone.perimeter,sensor.loc) " +
+                "and sensor.id = reading.sensorId and sensor.typeID = '"+ type +"' and " +
+                "ts IN (SELECT ts FROM reading WHERE ts BETWEEN '"
+                + from.toString() + "' AND '" + to.toString() + "')";
+        ResultSet rs;
+        ResultSetMetaData metadata;
+        //Query
+        try{
+            if(con == null){
+                //Error connecting to DataBase
+                Log.e("connection","Couldnt connect to to database!?!");
+            } else {
+                //just a test query
+                Statement stmt = con.createStatement();
+                rs = stmt.executeQuery(query);
+                if (rs.next()){
+                    Log.i("connection","it worked!");
+                    metadata = rs.getMetaData();
+                    while (rs.next()) {
+                        Reading read = new Reading();
+                        Log.v("Reading", ""
+                                + metadata.getColumnName(1) + ": " + rs.getInt(1)+ "\n"
+                                + metadata.getColumnName(2) + ": " + rs.getInt(2)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(3)+ "\n"
+                                + metadata.getColumnName(3) + ": " + rs.getFloat(4)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getFloat(5)+ "\n"
+                                + metadata.getColumnName(4) + ": " + rs.getTimestamp(6)+ "\n"
+                        );
+                        //no need for zoneID
+                        read.setSensorID(rs.getInt(2));
+                        read.setX(rs.getFloat(3));
+                        read.setY(rs.getFloat(4));
+                        read.setValue(rs.getFloat(5));
+                        read.setTs(rs.getTimestamp(6));
+                        vals.add(read);
+                    }
+                }
+            }
+        }catch (Exception ex){
+            Log.e("Exceptions","");
+            ex.printStackTrace();
+            return null;
+        }
+        ///////////////////////////////////////////////////////////////////
+        //parse it
+        for (int i = 0; i < vals.size(); i++) {
+            double lat = (double)vals.get(i).getY();
+            double lng = (double)vals.get(i).getX();
+            list.add(new LatLng(lat,lng));
+        }
+        return list;
+    }
+
 
     public ArrayList<Reading> getRange(Timestamp from, Timestamp to, int typeID){
         ArrayList<Reading> vals = new ArrayList<>();
